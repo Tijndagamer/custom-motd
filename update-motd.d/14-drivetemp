@@ -1,0 +1,25 @@
+#!/bin/bash
+#
+#   14-drivetemp - Show drive temperature
+#
+#   Copyright (c) 2018 Martijn
+#   Released under the GPLv3.
+
+NC="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+
+echo "Drive temperature:"
+for drive in $(ls /dev/sd[a-z]);
+do
+    temp=$(hddtemp -q --numeric $drive)
+
+    if [ "$temp" -eq "0" ]; then
+        continue # hddtemp does not support this drive, or the drive doesn't have a temperature sensor.
+    elif [ "$temp" -gt "35" ]; then
+		printf "${drive}: ${RED}${temp}°C${NC}\n"
+    else
+		printf "${drive}: ${GREEN}${temp}°C${NC}\n"
+	fi
+done
+printf "\n"
