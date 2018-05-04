@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+#   13-service-status - Print status of critical services
+#
+#   Copyright (c) 2018 Martijn
+#   Released under the GPLv3.
+
+NC="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+
+function active_test {
+    state=$(systemctl --property=ActiveState show $1 | sed "s/ActiveState=//")
+    if [ "$state" == "active" ]; then
+        printf "${GREEN}${state}${NC}"
+    else
+        printf "${RED}${state}${NC}"
+    fi
+}
+
+echo "Services status:"
+printf "sshd: $(active_test sshd.service)\t"
+printf "nginx: $(active_test nginx.service)\t"
+printf "fail2ban: $(active_test fail2ban.service)\n"
+printf "ufw: $(active_test ufw.service)\t"
+printf "apcupsd: $(active_test apcupsd.service)\n"
