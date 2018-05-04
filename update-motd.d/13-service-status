@@ -17,6 +17,7 @@ function active_test {
         printf "${RED}${state}${NC}"
     fi
 }
+echo ""
 
 echo "Services status:"
 printf "sshd: $(active_test sshd.service)\t"
@@ -24,3 +25,5 @@ printf "nginx: $(active_test nginx.service)\t"
 printf "fail2ban: $(active_test fail2ban.service)\n"
 printf "ufw: $(active_test ufw.service)\t"
 printf "apcupsd: $(active_test apcupsd.service)\n"
+
+echo ""
