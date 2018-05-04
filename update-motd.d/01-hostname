@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+#    01-hostname - Print big hostname
+#   
+#    Copyright (c) 2018 Martijn
+#    Released under the GPLv3.
+
+RED="\033[0;31m"
+NC="\033[0m"
+printf "${RED}$(figlet -f slant "$HOSTNAME")${NC}\n"
