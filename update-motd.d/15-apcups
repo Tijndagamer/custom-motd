@@ -1,0 +1,15 @@
+#!/bin/bash
+#
+#   15 - apcups - Show APC UPS status
+#
+#   Copyright (c) 2018 Martijn
+#   Released under the GPLv3.
+
+NC="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+
+echo "UPS status:"
+
+echo "$(apcaccess | grep -P "STATUS|BCHARGE" | sed "s/STATUS   : //g" | sed "s/BCHARGE  : /Battery: /g" | sed "s/ Percent/%/g")"
+
