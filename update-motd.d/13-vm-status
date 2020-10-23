@@ -1,0 +1,26 @@
+#!/bin/bash
+#
+#   13-vm-status - Print status of virtual machines
+#
+#   Copyright (c) 2020 Martijn
+#   Released under the GPLv3.
+
+NC="\033[0m"
+RED="\033[0;31m"
+GREEN="\033[0;32m"
+
+function active_test {
+    state=$(virsh domstate $1)
+    if [ "$state" == "running" ]; then
+        printf "${GREEN}${state}${NC}"
+    else
+        printf "${RED}${state}${NC}"
+    fi
+}
+echo ""
+
+echo "Services status:"
+printf "example0: $(active_test example0)\t"
+printf "debian1: $(active_test debian1)\t"
+
+echo ""
